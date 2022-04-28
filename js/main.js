@@ -46,13 +46,26 @@ function ready(){
     document.getElementsByClassName("btn-buy")[0].addEventListener("click", buyButtonClicked)
 }
 
+function cleanString(text) {
+    return text.replace('R$', '')
+}
+
 // Função comprar e redirecionar para o zap
 function buyButtonClicked(){
     // alert("Seu pedido será enviado via whatsapp..")
+    console.log('- - -')
+    let objetos_para_compra = [];
+    let itens_carrinho = document.getElementsByClassName('detail-box')
+    let frase = 'Olá tenho interesse nesse ';
+    
+    for(let item of itens_carrinho) {
+        frase += `[ Produto ${item.getElementsByClassName('cart-product-title')[0].textContent} na quantidade de ${parseFloat(item.getElementsByClassName('cart-quantity')[0].value)} no valor R$ ${parseFloat(cleanString(item.getElementsByClassName('cart-price')[0].textContent))} ] `
+    }
+
     var title = document.getElementsByClassName("cart-product-title")[0].innerText
     var price = document.getElementsByClassName("cart-price")[0].innerText
     
-    var url = ("https://api.whatsapp.com/send?phone=558699692453&text= Olá tenho interesse nesse pedido -> Nome: " + title + " Valor: " + price);
+    var url = (`https://api.whatsapp.com/send?phone=558699692453&text=${frase}`);
 
     window.open(url);   
     
