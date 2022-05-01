@@ -53,19 +53,19 @@ function cleanString(text) {
 // Função comprar e redirecionar para o zap
 function buyButtonClicked(){
     // alert("Seu pedido será enviado via whatsapp..")
-    console.log('- - -')
     let objetos_para_compra = [];
-    let itens_carrinho = document.getElementsByClassName('detail-box')
-    let frase = 'Olá tenho interesse nesse ';
+    let itens_carrinho = document.getElementsByClassName('detail-box');
+    let frase = 'Olá tenho interesse nesse produto: ';
+    let frase2 = 'Total: ' + document.getElementsByClassName('total-price')[0].innerText;
     
     for(let item of itens_carrinho) {
-        frase += `[ Produto ${item.getElementsByClassName('cart-product-title')[0].textContent} na quantidade de ${parseFloat(item.getElementsByClassName('cart-quantity')[0].value)} no valor R$ ${parseFloat(cleanString(item.getElementsByClassName('cart-price')[0].textContent))} ] `
+        frase += `[ ${item.getElementsByClassName('cart-product-title')[0].textContent} quantidade:  ${parseFloat(item.getElementsByClassName('cart-quantity')[0].value)} no valor R$ ${parseFloat(cleanString(item.getElementsByClassName('cart-price')[0].textContent))} ] `
     }
 
     var title = document.getElementsByClassName("cart-product-title")[0].innerText
     var price = document.getElementsByClassName("cart-price")[0].innerText
     
-    var url = (`https://api.whatsapp.com/send?phone=558699692453&text=${frase}`);
+    var url = (`https://api.whatsapp.com/send?phone=5586995556321&text=${frase}%20${frase2}`);
 
     window.open(url);   
     
